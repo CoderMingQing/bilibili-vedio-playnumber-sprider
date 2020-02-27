@@ -1,7 +1,7 @@
 import requests
 
 url = "https://api.bilibili.com/x/space/arc/sea\
-rch?mid=379041822&pn=1&ps=25&jsonp=jsonp"
+rch?mid=xxxxx&pn=1&ps=25&jsonp=jsonp"
 
 
 def getJson(url):
