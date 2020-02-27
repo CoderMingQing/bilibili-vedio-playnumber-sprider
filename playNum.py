@@ -1,5 +1,7 @@
 import requests
-import json
+
+url = "https://api.bilibili.com/x/space/arc/sea\
+rch?mid=379041822&pn=1&ps=25&jsonp=jsonp"
 
 
 def getJson(url):
@@ -12,18 +14,29 @@ def getJson(url):
         # 通过code的值判断json是否是正确数据，0为正确值
         if rt["code"] != 0:
             rt = None
-    except expression as identifier:
+    except Exception as identifier:
         print(r.status_code)
         print(identifier)
     return rt
-def get
 
-if __name__ == "__main__":
-    url = "https://api.bilibili.com/x/space/arc/search?mid=25533789&pn=1&ps=25&jsonp=jsonp"
+
+def getVediosInfo():
+    stringList = []
     rt = getJson(url)
-    if rt != None:
+    if rt is not None:
         try:
-            print(rt["data"]["list"]["vlist"][0]["play"])
+            vedios = rt["data"]["list"]["vlist"]
+            for v in vedios:
+                stringList.append(v["title"] + " ")
+                stringList.append("播放数：")
+                stringList.append(str(v["play"]))
+                stringList.append("\n")
+            return "".join(stringList)
         except KeyError as identifier:
             print(str(identifier) + "已不存在该json的keys中，请根据下面的json修改\n")
             print(rt)
+    return "抓取失败，重试或查看日志"
+
+
+if __name__ == "__main__":
+    print(getVediosInfo())
